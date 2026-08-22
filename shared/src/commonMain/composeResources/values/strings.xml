@@ -1,0 +1,113 @@
+<resources>
+    <!-- Оболочка стенда -->
+    <string name="stand_title">Демо-стенд Л1</string>
+    <string name="stand_subtitle">UI и состояние · Compose Multiplatform</string>
+    <string name="stand_back">Назад</string>
+    <string name="stand_theme_dark">Тёмная тема</string>
+    <string name="stand_theme_light">Светлая тема</string>
+    <string name="stand_locale_note">Все подписи стенда приехали из ресурсов и следуют языку системы</string>
+    <string name="stand_not_found">Демо не найдено</string>
+
+    <!-- Уровни глубины: формулировки из шкалы глубины курса -->
+    <string name="depth_usage">Как пользоваться</string>
+    <string name="depth_mechanism">Как устроено</string>
+    <string name="depth_internals">Под капотом</string>
+
+    <!-- Названия демо -->
+    <string name="demo_state_hoisting">Подъём состояния</string>
+    <string name="demo_remember_input">remember и ввод</string>
+    <string name="demo_theme_tokens">Тема и захардкоженный цвет</string>
+    <string name="demo_modifier_order">Порядок модификаторов</string>
+    <string name="demo_single_pass">Один проход измерения</string>
+    <string name="demo_infinite_height">Бесконечная высота</string>
+    <string name="demo_positional_memory">Память по позиции вызова</string>
+    <string name="demo_list_keys">Ключи в списке</string>
+    <string name="demo_search">Поиск и лишние перерисовки</string>
+
+    <!-- A4 Подъём состояния -->
+    <string name="a4_explanation">Ниже два экземпляра одного и того же компонента. Своего состояния у него нет: значение приходит параметром, намерение уходит колбэком.</string>
+    <string name="a4_first_field">Первое поле</string>
+    <string name="a4_second_field">Второе поле</string>
+    <string name="a4_state_lives_here">Состояние лежит здесь, у родителя:</string>
+    <string name="a4_first_value">первое: «%1$s»</string>
+    <string name="a4_second_value">второе: «%1$s»</string>
+
+    <!-- A3 remember и ввод -->
+    <string name="a3_explanation">Попробуйте напечатать что-нибудь в обоих режимах.</string>
+    <string name="a3_with_remember">С remember</string>
+    <string name="a3_without_remember">Без remember</string>
+    <string name="a3_hint_with">состояние живёт между рекомпозициями</string>
+    <string name="a3_hint_without">mutableStateOf создаётся заново на каждой рекомпозиции</string>
+    <string name="a3_input_label">Введите текст</string>
+    <string name="a3_state_content">Что лежит в состоянии: «%1$s»</string>
+
+    <!-- A5 Тема -->
+    <string name="a5_explanation">Переключите тему в шапке стенда. Одна карточка поменяется, вторая нет.</string>
+    <string name="a5_from_tokens">Цвет из токенов темы</string>
+    <string name="a5_hardcoded">Цвет зашит в код</string>
+
+    <!-- A7 Порядок модификаторов -->
+    <string name="a7_explanation">Два одинаковых элемента. Отличается только порядок padding и size — и габариты получаются разные.</string>
+    <string name="a7_padding_first">padding до size: отступ снаружи, синий квадрат остаётся 120</string>
+    <string name="a7_size_first">size до padding: 120 включают отступ, синего остаётся меньше</string>
+
+    <!-- A6 Один проход измерения -->
+    <string name="a6_explanation">Три колонки разной высоты. Включите интринсики: колонки выровняются по самой высокой, а число измерений останется прежним.</string>
+    <string name="a6_intrinsics_on">Интринсики включены</string>
+    <string name="a6_intrinsics_off">Интринсики выключены</string>
+    <string name="a6_hint">следите за двумя числами ниже</string>
+    <string name="a6_measure_calls">Вызовов measure на %1$d детей</string>
+    <string name="a6_intrinsic_queries">Запросов интринсиков</string>
+    <string name="a6_cell_short">Короткая</string>
+    <string name="a6_cell_medium">Средняя колонка с текстом подлиннее</string>
+    <string name="a6_cell_another">Ещё одна</string>
+
+    <!-- A8 Бесконечная высота -->
+    <string name="a8_explanation">Прокручиваемый контейнер отдаёт детям неограниченную высоту. Ребёнок, который просит «всю доступную», просит бесконечность — и падает.</string>
+    <string name="a8_crash_on">Уронить: включено</string>
+    <string name="a8_crash_off">Уронить: выключено</string>
+    <string name="a8_hint">включать только вне пары: приложение действительно упадёт</string>
+    <string name="a8_code_title">Код, который падает:</string>
+    <string name="a8_exception_title">Настоящий текст исключения:</string>
+
+    <!-- A2 Память по позиции -->
+    <string name="a2_explanation">Одна и та же функция, одно и то же имя переменной внутри. Смотрите, сколько получилось разных чисел.</string>
+    <string name="a2_branch_a">Ветка A</string>
+    <string name="a2_branch_b">Ветка B</string>
+    <string name="a2_hint">переключайте и следите за нижним числом</string>
+    <string name="a2_act1_title">1. Два вызова подряд</string>
+    <string name="a2_act1_note">Функция одна, вызовов два — и памяти тоже две. Числа разные и никуда не убегают: позиции стабильны.</string>
+    <string name="a2_act2_title">2. Та же функция в двух ветках if</string>
+    <string name="a2_act2_note">Переключите тумблер несколько раз. Число меняется каждый раз — и при возврате на прежнюю ветку тоже. Уходя с ветки, композиция выбрасывает её слоты, и память начинается заново.</string>
+    <string name="a2_first_call">Первый вызов</string>
+    <string name="a2_second_call">Второй вызов</string>
+    <string name="a2_inside_a">Внутри ветки A</string>
+    <string name="a2_inside_b">Внутри ветки B</string>
+    <string name="a2_clicks">нажатий: %1$d</string>
+
+    <!-- A10 Ключи в списке -->
+    <string name="a10_explanation">Разверните вторую карточку, потом вставьте элемент в начало. Без ключа развёрнутой окажется соседняя.</string>
+    <string name="a10_with_key">С ключом</string>
+    <string name="a10_without_key">Без ключа</string>
+    <string name="a10_hint_with">идентичность берётся из id элемента</string>
+    <string name="a10_hint_without">идентичность берётся из позиции в списке</string>
+    <string name="a10_insert">Вставить в начало</string>
+    <string name="a10_new_item">Новый %1$d</string>
+    <string name="a10_inserted_first">вставлен в начало</string>
+    <string name="a10_expand">Развернуть</string>
+    <string name="a10_collapse">Свернуть</string>
+    <string name="a10_expanded_note">Это локальное состояние карточки. Оно живёт в slot table по тому адресу, который контейнер считает адресом этого элемента.</string>
+
+    <!-- A9 Поиск и лишние перерисовки -->
+    <string name="a9_explanation">Поле поиска со списком никак не связано. Наберите букву и следите за двумя счётчиками: список и обёртка ведут себя по-разному.</string>
+    <string name="a9_wrapper_kept">Обёртка живёт</string>
+    <string name="a9_wrapper_recreated">Обёртка пересоздаётся</string>
+    <string name="a9_hint_kept">ScreenState создан один раз — та же ссылка</string>
+    <string name="a9_hint_recreated">ScreenState вызывается в теле composable — каждый раз новая ссылка</string>
+    <string name="a9_search">Поиск</string>
+    <string name="a9_by_list">Список передан напрямую</string>
+    <string name="a9_by_list_note">новый инстанс каждый раз, но содержимое равно прежнему</string>
+    <string name="a9_by_wrapper">Список внутри обёртки</string>
+    <string name="a9_by_wrapper_note">нестабильный класс сравнивают по ссылке</string>
+    <string name="a9_redrawn">перерисован</string>
+</resources>

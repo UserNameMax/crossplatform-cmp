@@ -1,0 +1,101 @@
+<resources>
+    <string name="stand_title">Lecture 1 demo stand</string>
+    <string name="stand_subtitle">UI and state · Compose Multiplatform</string>
+    <string name="stand_back">Back</string>
+    <string name="stand_theme_dark">Dark theme</string>
+    <string name="stand_theme_light">Light theme</string>
+    <string name="stand_locale_note">Every label here came from resources and follows the system language</string>
+    <string name="stand_not_found">Demo not found</string>
+
+    <string name="depth_usage">How to use it</string>
+    <string name="depth_mechanism">How it works</string>
+    <string name="depth_internals">Under the hood</string>
+
+    <string name="demo_state_hoisting">State hoisting</string>
+    <string name="demo_remember_input">remember and text input</string>
+    <string name="demo_theme_tokens">Theme tokens vs hardcoded color</string>
+    <string name="demo_modifier_order">Modifier order</string>
+    <string name="demo_single_pass">Single measure pass</string>
+    <string name="demo_infinite_height">Infinite height</string>
+    <string name="demo_positional_memory">Positional memoization</string>
+    <string name="demo_list_keys">Keys in a list</string>
+    <string name="demo_search">Search and extra recompositions</string>
+
+    <string name="a4_explanation">Two instances of the very same component. It holds no state of its own: the value arrives as a parameter, the intent leaves as a callback.</string>
+    <string name="a4_first_field">First field</string>
+    <string name="a4_second_field">Second field</string>
+    <string name="a4_state_lives_here">The state lives here, in the parent:</string>
+    <string name="a4_first_value">first: «%1$s»</string>
+    <string name="a4_second_value">second: «%1$s»</string>
+
+    <string name="a3_explanation">Try typing something in both modes.</string>
+    <string name="a3_with_remember">With remember</string>
+    <string name="a3_without_remember">Without remember</string>
+    <string name="a3_hint_with">the state survives recompositions</string>
+    <string name="a3_hint_without">mutableStateOf is created anew on every recomposition</string>
+    <string name="a3_input_label">Type here</string>
+    <string name="a3_state_content">What the state holds: «%1$s»</string>
+
+    <string name="a5_explanation">Switch the theme in the header. One card changes, the other does not.</string>
+    <string name="a5_from_tokens">Color from theme tokens</string>
+    <string name="a5_hardcoded">Color hardcoded in the source</string>
+
+    <string name="a7_explanation">Two identical elements. Only the order of padding and size differs — and the resulting bounds differ too.</string>
+    <string name="a7_padding_first">padding before size: the inset is outside, the blue square stays 120</string>
+    <string name="a7_size_first">size before padding: 120 includes the inset, less blue is left</string>
+
+    <string name="a6_explanation">Three columns of different height. Turn intrinsics on: the columns align to the tallest, and the number of measurements stays the same.</string>
+    <string name="a6_intrinsics_on">Intrinsics on</string>
+    <string name="a6_intrinsics_off">Intrinsics off</string>
+    <string name="a6_hint">watch the two numbers below</string>
+    <string name="a6_measure_calls">measure calls for %1$d children</string>
+    <string name="a6_intrinsic_queries">Intrinsic queries</string>
+    <string name="a6_cell_short">Short</string>
+    <string name="a6_cell_medium">A middle column with somewhat longer text</string>
+    <string name="a6_cell_another">One more</string>
+
+    <string name="a8_explanation">A scrollable container hands its children an unbounded height. A child asking for «all available» is asking for infinity — and it crashes.</string>
+    <string name="a8_crash_on">Crash: on</string>
+    <string name="a8_crash_off">Crash: off</string>
+    <string name="a8_hint">turn on outside the lecture only: the app really does crash</string>
+    <string name="a8_code_title">The code that crashes:</string>
+    <string name="a8_exception_title">The real exception text:</string>
+
+    <string name="a2_explanation">The same function, the same variable name inside. Look how many different numbers came out.</string>
+    <string name="a2_branch_a">Branch A</string>
+    <string name="a2_branch_b">Branch B</string>
+    <string name="a2_hint">toggle it and watch the bottom number</string>
+    <string name="a2_act1_title">1. Two calls in a row</string>
+    <string name="a2_act1_note">One function, two calls — and two memories. The numbers differ and never drift: the positions are stable.</string>
+    <string name="a2_act2_title">2. The same function in two if branches</string>
+    <string name="a2_act2_note">Toggle a few times. The number changes every time — including when you come back to the previous branch. Leaving a branch throws away its slots, and the memory starts over.</string>
+    <string name="a2_first_call">First call</string>
+    <string name="a2_second_call">Second call</string>
+    <string name="a2_inside_a">Inside branch A</string>
+    <string name="a2_inside_b">Inside branch B</string>
+    <string name="a2_clicks">clicks: %1$d</string>
+
+    <string name="a10_explanation">Expand the second card, then insert an item at the top. Without a key the neighbour ends up expanded.</string>
+    <string name="a10_with_key">With key</string>
+    <string name="a10_without_key">Without key</string>
+    <string name="a10_hint_with">identity comes from the item id</string>
+    <string name="a10_hint_without">identity comes from the position in the list</string>
+    <string name="a10_insert">Insert at the top</string>
+    <string name="a10_new_item">New %1$d</string>
+    <string name="a10_inserted_first">inserted at the top</string>
+    <string name="a10_expand">Expand</string>
+    <string name="a10_collapse">Collapse</string>
+    <string name="a10_expanded_note">This is the card local state. It lives in the slot table at the address the container considers this item address.</string>
+
+    <string name="a9_explanation">The search field has nothing to do with the list. Type a letter and watch the two counters: the list and the wrapper behave differently.</string>
+    <string name="a9_wrapper_kept">Wrapper is kept</string>
+    <string name="a9_wrapper_recreated">Wrapper is recreated</string>
+    <string name="a9_hint_kept">ScreenState was created once — same reference</string>
+    <string name="a9_hint_recreated">ScreenState is called in the composable body — a new reference every time</string>
+    <string name="a9_search">Search</string>
+    <string name="a9_by_list">List passed directly</string>
+    <string name="a9_by_list_note">a new instance every time, but the content equals the previous one</string>
+    <string name="a9_by_wrapper">List inside a wrapper</string>
+    <string name="a9_by_wrapper_note">an unstable class is compared by reference</string>
+    <string name="a9_redrawn">redrawn</string>
+</resources>
