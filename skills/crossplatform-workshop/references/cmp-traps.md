@@ -210,3 +210,32 @@ nohup ./gradlew :webApp:wasmJsBrowserDevelopmentRun --console=plain > /tmp/web-r
 ```
 
 **Первый скриншот после действия почти всегда ловит недорисованный кадр** — делать второй.
+
+## Персистентность и платформа (ПЗ5, проверено 25.08.2026)
+
+Kotlin 2.4.10 / Compose Multiplatform 1.11.1. Все воспроизведены при сборке шаблона.
+
+| Симптом | Причина |
+|---|---|
+| `androidx.datastore` не резолвится в `commonMain` | 1.2.0 публикует артефакт под `wasmJs`, но **не под `js`**. Проект курса объявляет оба web-таргета. В опубликованном wasm-варианте фабрика к тому же `TODO("Not yet implemented")` |
+| `This declaration needs opt-in … ExperimentalWasmJsInterop` | любой `js("…")` в Kotlin/Wasm требует `@file:OptIn(kotlin.js.ExperimentalWasmJsInterop::class)` |
+| `… ExperimentalForeignApi` на iOS | то же для Foundation-API: `NSSearchPathForDirectoriesInDomains`, `writeToFile` |
+| `'val maxWidth: Dp' cannot be called in this context with an implicit receiver` | `maxWidth` — свойство scope `BoxWithConstraints`. Вложили `Column` — неявный получатель потерян. Снимать ширину в локальную переменную сразу |
+| Вторая панель показывает данные прошлой записи | ViewModel переиспользована между разными `id`. `key(id) { … }` |
+| «Назад» браузера меняет адрес, экран прежний | написана только половина связи стек→адрес. Вторая половина — слушатель `popstate` |
+| Переход зациклился, адрес мигает | петля стек→адрес→стек. Сравнение «уже такой же — ничего не делаем» в обеих половинах |
+| Битый адрес `#/record/2/x/3` открыл 2 и 3 | `mapNotNull` склеил стек, потеряв середину. `takeWhile` обрезает |
+| `Cannot access 'object Res': it is internal in file` из точки входа desktop | сгенерированный `Res` внутренний для своего модуля. Отдавать строку наружу composable-функцией из общего кода |
+| `ImageComposeScene`: `Method setCurrentState must be called on the main thread` | сцену и `render()` трогать только с потока событий (`SwingUtilities.invokeAndWait`) |
+| Headless-рендер выдал пустой экран | пауза между кадрами сделана **на** потоке событий — ресурсы и сеть не успели приехать. Спать на главном, рендерить на EDT |
+
+### Что оказалось НЕ так, как ожидалось
+
+- **`localStorage` через `js("…")` работает.** Ожидалась поломка на web, ломать оказалось
+  нечего: сгенерированная таблица импортов wasm-бандла содержит все три моста дословно —
+  проверено `grep` по `webApp.js`
+- **Лямбда в `js("…")` на Kotlin/Wasm компилируется и работает.**
+  `addPopStateListener(listener: () -> Unit)` даёт корректный мост
+  `(listener) => { window.addEventListener('popstate', function () { listener(); }) }`
+- **Пропущенный `actual` — ошибка компиляции, а не линковки.** Указывает на строку с `expect`
+  в общем коде и роняет всю сборку, а не один таргет
