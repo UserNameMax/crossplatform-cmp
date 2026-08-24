@@ -211,9 +211,10 @@ referrer-whitelist), Metropolitan Museum (у картинок нет `ACAO`), Ar
 
 | Путь | Что | Отдаётся студентам |
 |---|---|---|
-| `artifacts` → [`crossplatform-cmp`](https://github.com/UserNameMax/crossplatform-cmp) | зонтичный: стенд Л1 в `v1/`, шаблон ПЗ1 подмодулем, метод курса в `skills/` | да, кроме `skills/` |
+| `artifacts` → [`crossplatform-cmp`](https://github.com/UserNameMax/crossplatform-cmp) | зонтичный: стенды лекций в `v1/`, `v2/`, ..., шаблон ПЗ1 подмодулем, метод курса в `skills/` | да, кроме `skills/` |
 | `artifacts/workshop` → [`pokedex-cmp`](https://github.com/UserNameMax/pokedex-cmp) | шаблон ПЗ1 «Покедекс»: `main` = старт, теги `w1-cp1…cp5`, ветка `workshop/w1-end` = финал | да |
-| `artifacts/v1` | демо-стенд Л1, девять демо на четырёх таргетах — внутри зонтичного, своего репозитория больше нет | да |
+| `artifacts/v1` | демо-стенд Л1 (В1), девять демо на четырёх таргетах — внутри зонтичного, своего репозитория нет | да |
+| `artifacts/v2` | демо-стенд Л4 (В2, CMP), семь демо — отдельный стенд на веху, а не на весь курс (решено 24.08.2026) | да |
 | корень курса | `course-plan-unified.md`, `WORKSHOP-SPEC-*.md`, `api-contract/` — **внутренние заметки, вне git** | нет |
 
 **Почему подмодуль, а не одна история** (решено 23.08.2026). Студент клонирует шаблон
