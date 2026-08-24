@@ -1,0 +1,71 @@
+<resources>
+    <string name="stand_title">Lecture 5 demo stand</string>
+    <string name="stand_subtitle">Talking to the platform · Compose Multiplatform</string>
+    <string name="stand_back">Back</string>
+    <string name="stand_theme_dark">Dark theme</string>
+    <string name="stand_theme_light">Light theme</string>
+    <string name="stand_locale_note">Every label here came from resources and follows the system language</string>
+    <string name="stand_not_found">Demo not found</string>
+    <string name="window_title">Lecture 5 demo stand</string>
+
+    <string name="depth_usage">How to use it</string>
+    <string name="depth_mechanism">How it works</string>
+    <string name="depth_internals">Under the hood</string>
+
+    <string name="demo_expect_actual">expect/actual: one source, three answers</string>
+    <string name="demo_resources">Resources across three targets</string>
+    <string name="demo_adaptive">Adaptive: width decides, not the device</string>
+    <string name="demo_stack_address">A stack of objects and a page address</string>
+    <string name="demo_source_of_truth">What counts as the source of truth</string>
+    <string name="demo_binding">What the expect turned into</string>
+
+    <string name="ea_explanation">The same demo answers with three different strings on desktop, in a browser and on Android. The compiler did the substitution - there is no runtime check for «where are we» anywhere in the app.</string>
+    <string name="ea_target">Target: %1$s</string>
+    <string name="ea_storage">Storage: %1$s</string>
+    <string name="ea_binding">Substitution: %1$s</string>
+    <string name="ea_key_label">Value to store</string>
+    <string name="ea_write">Write</string>
+    <string name="ea_read">Read</string>
+    <string name="ea_read_result">Read back: %1$s</string>
+    <string name="ea_read_empty">Nothing read yet</string>
+    <string name="ea_note">Close the app and open it again - the value stays. On the web the same survives a tab reload.</string>
+
+    <string name="res_explanation">One resource in the source, different ones in the build. On desktop and Android it is already inside the binary; on the web it has to be downloaded, and the first frame can beat it.</string>
+    <string name="res_sample">This string came from resources</string>
+    <string name="res_waiting">Counting frames until the string shows up…</string>
+    <string name="res_ready_after">The string appeared on frame %1$d</string>
+    <string name="res_locale_note">Switch the system language - both the string and the formatting change with no rebuild.</string>
+
+    <string name="ad_explanation">Resize the window. The number on top is the available width reported by BoxWithConstraints; the layout flips at 840 dp.</string>
+    <string name="ad_toggle">Decide by target instead of width</string>
+    <string name="ad_toggle_hint">«It is desktop, so it is wide» - and a narrow window breaks the layout</string>
+    <string name="ad_width">Available width: %1$d dp</string>
+    <string name="ad_layout_single">Layout: one column</string>
+    <string name="ad_layout_two">Layout: two columns</string>
+    <string name="ad_pane_list">List</string>
+    <string name="ad_pane_detail">Detail</string>
+
+    <string name="sa_explanation">On the left is the Navigation 3 stack - a list of objects with fields. On the right is an address string assembled from it by hand. Nothing but fifteen lines of code sits in between: the library has no route graph at all.</string>
+    <string name="sa_push">Open a detail</string>
+    <string name="sa_pop">Back</string>
+    <string name="sa_stack_title">The stack is a plain list of objects:</string>
+    <string name="sa_address">Page address: %1$s</string>
+    <string name="sa_no_address">The address would be %1$s (this target has no address bar)</string>
+    <string name="sa_note">go_router is the other way round: the stack IS a list of path strings, so the address bar works on its own - but the screen has no typed argument. That is a difference of models, not of convenience.</string>
+
+    <string name="sot_explanation">Favorites go into local storage. The switch changes WHAT exactly goes there: ids only, or ids together with names. While the network is up you cannot tell the difference.</string>
+    <string name="sot_toggle">Store ids only</string>
+    <string name="sot_toggle_hint">The shortest thing you can write - and the most useless one offline</string>
+    <string name="sot_add">Add to favorites</string>
+    <string name="sot_restart">Restart the screen (read from storage only)</string>
+    <string name="sot_offline">Network off: %1$s</string>
+    <string name="sot_favorites_title">What could be shown after the restart:</string>
+    <string name="sot_favorites_empty">(nothing read yet)</string>
+
+    <string name="bind_explanation">expect/actual is not a bridge and not a shim. Substitution happens at compile time, and each target ends up with its own machine-level result. Below, the target reports on itself at runtime.</string>
+    <string name="bind_live_title">The target reporting on itself:</string>
+    <string name="bind_toggle">Show build dumps</string>
+    <string name="bind_toggle_hint">Captured in advance; the commands are inside the dump</string>
+    <string name="bind_dumps_title">What the build tools produced:</string>
+    <string name="bind_loading">Reading the dump…</string>
+</resources>

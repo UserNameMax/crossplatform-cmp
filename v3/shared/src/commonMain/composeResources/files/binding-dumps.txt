@@ -1,0 +1,89 @@
+ВО ЧТО ПРЕВРАТИЛСЯ expect/actual
+Снято 25.08.2026 на этом самом проекте. kotlin = "2.4.10"  composeMultiplatform = "1.11.1"
+
+Один и тот же исходник — shared/src/commonMain/.../platform/PlatformFacts.kt:
+
+    expect fun platformFacts(): PlatformFacts
+
+Ниже — что от него осталось у каждого таргета после сборки. Ни одной строки
+дампа не написано руками: всё выдали инструменты, команды указаны рядом.
+
+────────────────────────────────────────────────────────────────────────────
+1. JVM desktop — байткод, метод статического класса
+────────────────────────────────────────────────────────────────────────────
+$ javap -p shared/build/classes/kotlin/jvm/main/.../PlatformFacts_jvmKt.class
+
+Compiled from "PlatformFacts.jvm.kt"
+public final class band.effective.education.crossplatform.platform.PlatformFacts_jvmKt {
+  public static final band.effective...PlatformFacts platformFacts();
+}
+
+Никакого следа слова expect. Имя файла превратилось в имя класса, actual —
+в обычный статический метод. Виртуальная машина найдёт его по имени во время
+работы: именно поэтому демо и может показать этот список само, рефлексией.
+
+────────────────────────────────────────────────────────────────────────────
+2. Kotlin/Native (iOS) — символ в нативном бинарнике
+────────────────────────────────────────────────────────────────────────────
+$ ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64
+$ nm -gU .../Shared.framework/Shared | grep PlatformFacts
+
+000000000012b3b0 S _OBJC_CLASS_$_SharedPlatformFacts_iosKt
+000000000012b388 S _OBJC_METACLASS_$_SharedPlatformFacts_iosKt
+000000000012e880 S __OBJC_LABEL_PROTOCOL_$_SharedPlatformFacts
+0000000000115718 D __OBJC_PROTOCOL_$_SharedPlatformFacts
+
+$ grep -A2 platformFacts .../Shared.framework/Headers/Shared.h
+
+__attribute__((swift_name("PlatformFacts_iosKt")))
+@interface SharedPlatformFacts_iosKt : SharedBase
++ (id<SharedPlatformFacts>)platformFacts __attribute__((swift_name("platformFacts()")));
+@end
+
+Вот он, гвоздь пары, целиком видимый глазами: у функции есть АДРЕС в бинарнике
+(0x12b3b0). Не ссылка на метод, которую кто-то разрешит при запуске, — адрес.
+Виртуальной машины нет; Kotlin скомпилирован в машинный код заранее, ровно как
+C. Отсюда и всё остальное: перечислить методы во время работы нечем.
+
+Размер debug-фреймворка: 253 МБ. Это не опечатка и не наш код: столько занимает
+отладочная сборка со всеми символами. Release-сборка на порядок меньше.
+
+────────────────────────────────────────────────────────────────────────────
+3. Kotlin/Wasm (web) — функция модуля, а js(...) уезжает в таблицу импортов
+────────────────────────────────────────────────────────────────────────────
+$ ./gradlew :webApp:wasmJsBrowserDevelopmentExecutableDistribution
+$ grep "band.effective" webApp/build/dist/wasmJs/developmentExecutable/webApp.js
+
+'band.effective...platform.userAgentShort' : () => navigator.userAgent.split(' ').slice(-2).join(' ')
+'band.effective...platform.currentHref' : () => window.location.href
+'band.effective...platform.hasLocalStorage' : () => typeof window.localStorage !== 'undefined'
+'band.effective...platform.hasWebAssembly' : () => typeof WebAssembly !== 'undefined'
+'band.effective...store.localStorageGetItem' : (key) => window.localStorage.getItem(key)
+'band.effective...store.localStorageSetItem' : (key, value) => { window.localStorage.setItem(key, value) }
+'band.effective...store.localStorageRemoveItem' : (key) => { window.localStorage.removeItem(key) }
+
+Каждая строчка, написанная внутри js("..."), лежит здесь ДОСЛОВНО — вместе с
+полным именем Kotlin-функции. Это и есть граница между модулем WebAssembly и
+браузером: wasm сам по себе не умеет ни DOM, ни localStorage, и всё, что ему
+нужно снаружи, перечислено в этой таблице поимённо.
+
+────────────────────────────────────────────────────────────────────────────
+Что из этого следует
+────────────────────────────────────────────────────────────────────────────
+Три таргета — три разных механизма подстановки: метод класса, адрес в
+бинарнике, импорт модуля. Общего рантайма, который бы «выбирал реализацию»,
+не существует ни на одном из них. Выбор сделан компилятором и в собранном
+артефакте уже не представлен вообще ничем.
+
+Практическое следствие, ради которого всё это показано: пропущенный actual —
+ошибка КОМПИЛЯЦИИ, а не падение у пользователя. Причём не линковки и не
+рантайма: компилятор общего модуля знает состав таргетов и ругается сразу.
+
+Проверено 25.08.2026 удалением файла PlatformFacts.jvm.kt:
+
+e: .../platform/PlatformFacts.kt:31:1 Expected platformFacts has no actual
+   declaration in module <commonMain> for JVM
+
+Ошибка указывает на строку с expect в ОБЩЕМ коде, а не на отсутствующий файл.
+И падает при этом вся сборка, а не только JVM-таргет: собрать приложение
+«пока без одной платформы» нельзя.

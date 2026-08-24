@@ -1,0 +1,80 @@
+<resources>
+    <!-- Оболочка стенда -->
+    <string name="stand_title">Демо-стенд Л5</string>
+    <string name="stand_subtitle">Взаимодействие с платформой · Compose Multiplatform</string>
+    <string name="stand_back">Назад</string>
+    <string name="stand_theme_dark">Тёмная тема</string>
+    <string name="stand_theme_light">Светлая тема</string>
+    <string name="stand_locale_note">Все подписи стенда приехали из ресурсов и следуют языку системы</string>
+    <string name="stand_not_found">Демо не найдено</string>
+    <string name="window_title">Демо-стенд Л5</string>
+
+    <!-- Уровни глубины: формулировки из шкалы глубины курса -->
+    <string name="depth_usage">Как пользоваться</string>
+    <string name="depth_mechanism">Как устроено</string>
+    <string name="depth_internals">Под капотом</string>
+
+    <!-- Названия демо. Стрелка ASCII (не юникодная) - на web/wasmJs шрифт стенда её не рисует -->
+    <string name="demo_expect_actual">expect/actual: один код, три ответа</string>
+    <string name="demo_resources">Ресурсы через три таргета</string>
+    <string name="demo_adaptive">Адаптив: решает ширина, не устройство</string>
+    <string name="demo_stack_address">Стек объектов и адрес страницы</string>
+    <string name="demo_source_of_truth">Что считается источником правды</string>
+    <string name="demo_binding">Во что превратился expect</string>
+
+    <!-- A1 expect/actual -->
+    <string name="ea_explanation">Одно и то же демо, запущенное на desktop, в браузере и на Android, отвечает тремя разными строками. Подстановку сделал компилятор - в приложении нет ни одной проверки «а где мы сейчас».</string>
+    <string name="ea_target">Таргет: %1$s</string>
+    <string name="ea_storage">Хранилище: %1$s</string>
+    <string name="ea_binding">Подстановка: %1$s</string>
+    <string name="ea_key_label">Что записать в хранилище</string>
+    <string name="ea_write">Записать</string>
+    <string name="ea_read">Прочитать</string>
+    <string name="ea_read_result">Прочитано: %1$s</string>
+    <string name="ea_read_empty">Ещё не читали</string>
+    <string name="ea_note">Закройте приложение и откройте заново - значение останется. На web то же самое переживает перезагрузку вкладки.</string>
+
+    <!-- A2 ресурсы -->
+    <string name="res_explanation">Ресурс один в исходнике и разный в сборке. На desktop и Android он уже внутри бинарника, на web его надо скачать - и первый кадр успевает отрисоваться раньше.</string>
+    <string name="res_sample">Строка приехала из ресурсов</string>
+    <string name="res_waiting">Считаем кадры до появления строки…</string>
+    <string name="res_ready_after">Строка появилась на кадре: %1$d</string>
+    <string name="res_locale_note">Переключите язык системы - и строка, и порядок форматирования сменятся без пересборки.</string>
+
+    <!-- A3 адаптив -->
+    <string name="ad_explanation">Растяните окно. Число сверху - доступная ширина, которую отдал BoxWithConstraints; раскладка меняется на пороге 840 dp.</string>
+    <string name="ad_toggle">Решать по таргету, а не по ширине</string>
+    <string name="ad_toggle_hint">«Это же desktop, значит широко» - и на узком окне макет ломается</string>
+    <string name="ad_width">Доступная ширина: %1$d dp</string>
+    <string name="ad_layout_single">Раскладка: одна колонка</string>
+    <string name="ad_layout_two">Раскладка: две колонки</string>
+    <string name="ad_pane_list">Список</string>
+    <string name="ad_pane_detail">Деталь</string>
+
+    <!-- B1 стек и адрес -->
+    <string name="sa_explanation">Слева стек Navigation 3 - список объектов с полями. Справа строка адреса, собранная из него руками. Ничего, кроме пятнадцати строк кода, между ними нет: графа маршрутов у библиотеки не существует.</string>
+    <string name="sa_push">Открыть деталь</string>
+    <string name="sa_pop">Назад</string>
+    <string name="sa_stack_title">Стек - обычный список объектов:</string>
+    <string name="sa_address">Адрес страницы: %1$s</string>
+    <string name="sa_no_address">Адрес был бы такой: %1$s (у этого таргета адресной строки нет)</string>
+    <string name="sa_note">У go_router наоборот: стек и есть список строк-путей, поэтому адресная строка работает сама - но типизированного аргумента у экрана нет. Это расхождение моделей, а не разница в удобстве.</string>
+
+    <!-- B2 источник правды -->
+    <string name="sot_explanation">Избранное сохраняется в локальное хранилище. Тумблер меняет, ЧТО именно туда кладут: только идентификаторы или идентификаторы вместе с именами. Пока сеть есть, разницы не видно.</string>
+    <string name="sot_toggle">Хранить только идентификаторы</string>
+    <string name="sot_toggle_hint">Самое короткое, что можно записать, - и самое бесполезное без сети</string>
+    <string name="sot_add">Добавить в избранное</string>
+    <string name="sot_restart">Перезапустить экран (читать только из хранилища)</string>
+    <string name="sot_offline">Сеть выключена: %1$s</string>
+    <string name="sot_favorites_title">Что удалось показать после перезапуска:</string>
+    <string name="sot_favorites_empty">(ничего ещё не читали)</string>
+
+    <!-- C1 гвоздь: во что превратился expect -->
+    <string name="bind_explanation">expect/actual - не мост и не прослойка. Подстановка происходит на этапе компиляции, и у каждого таргета получается свой машинный результат. Ниже таргет рассказывает о себе сам, в рантайме.</string>
+    <string name="bind_live_title">Живой отчёт таргета о себе:</string>
+    <string name="bind_toggle">Показать дампы сборки</string>
+    <string name="bind_toggle_hint">Сняты заранее; команды записаны в самом дампе</string>
+    <string name="bind_dumps_title">Что выдали инструменты сборки:</string>
+    <string name="bind_loading">Читаем дамп…</string>
+</resources>
