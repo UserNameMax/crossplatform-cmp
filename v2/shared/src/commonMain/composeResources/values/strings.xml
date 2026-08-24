@@ -1,0 +1,105 @@
+<resources>
+    <!-- Оболочка стенда -->
+    <string name="stand_title">Демо-стенд Л4</string>
+    <string name="stand_subtitle">Данные и асинхронность · Compose Multiplatform</string>
+    <string name="stand_back">Назад</string>
+    <string name="stand_theme_dark">Тёмная тема</string>
+    <string name="stand_theme_light">Светлая тема</string>
+    <string name="stand_locale_note">Все подписи стенда приехали из ресурсов и следуют языку системы</string>
+    <string name="stand_not_found">Демо не найдено</string>
+
+    <!-- Уровни глубины: формулировки из шкалы глубины курса -->
+    <string name="depth_usage">Как пользоваться</string>
+    <string name="depth_mechanism">Как устроено</string>
+    <string name="depth_internals">Под капотом</string>
+
+    <!-- Названия демо. Стрелка ASCII (не юникодная →) — на web/wasmJs шрифт стенда её не рисует -->
+    <string name="demo_mapper">DTO -> domain -> UI, три модели</string>
+    <string name="demo_screen_state">Состояние экрана: сумма против флажков</string>
+    <string name="demo_pagination">Пагинация: дозагрузка без дублей</string>
+    <string name="demo_debounce">Дебаунс поверх готового поиска</string>
+    <string name="demo_flow_cold_hot">Flow: cold vs hot, conflation</string>
+    <string name="demo_serialization">Сериализация без рефлексии</string>
+    <string name="demo_structured_concurrency">Уход во время загрузки</string>
+
+    <!-- A2 Mapper -->
+    <string name="mapper_toggle_label">Сервер обновил схему (image_url -> sprite)</string>
+    <string name="mapper_using_v1">Разбирается PokemonCardDtoV1 (поле image_url)</string>
+    <string name="mapper_using_v2">Разбирается PokemonCardDtoV2 (поле sprite)</string>
+    <string name="mapper_screen_got">Экран получил PokemonCard — единственную модель, которую он знает:</string>
+    <string name="mapper_note">Код экрана (этот файл) не изменился между двумя положениями тумблера. Изменилось только то, какой mapper вызван: toDomain() у DtoV1 или у DtoV2.</string>
+
+    <!-- A3 Screen state -->
+    <string name="ss_intro">Слева — три независимых флажка. Справа — одна ScreenState-сумма.</string>
+    <string name="ss_boolean_title">Булева версия</string>
+    <string name="ss_is_loading">isLoading</string>
+    <string name="ss_is_error">isError</string>
+    <string name="ss_has_data">hasData</string>
+    <string name="ss_sealed_title">ScreenState-версия</string>
+    <string name="ss_label_loading">Loading</string>
+    <string name="ss_label_content">Content</string>
+    <string name="ss_label_empty">Empty</string>
+    <string name="ss_label_error">Error</string>
+    <string name="ss_error_loading">Ошибка загрузки</string>
+    <string name="ss_data_placeholder">Данные: 25 записей</string>
+    <string name="ss_empty">Пусто</string>
+    <string name="ss_illegal_warning">⚠ isLoading и isError одновременно true — спиннер поверх ошибки, состояние не имеет смысла, но булевы флаги его не запрещают</string>
+    <string name="ss_data_value">Данные: %1$s</string>
+    <string name="ss_error_value">Ошибка: %1$s</string>
+    <string name="ss_no_network">нет сети</string>
+
+    <!-- A4 Pagination -->
+    <string name="pg_loaded">Загружено: %1$d</string>
+    <string name="pg_requests">Запросов: %1$d</string>
+    <string name="pg_error">Ошибка: %1$s</string>
+    <string name="pg_error_fallback">ошибка сети</string>
+    <string name="pg_loading_next">загружается следующая страница</string>
+    <string name="pg_end">Конец списка</string>
+
+    <!-- A5 Debounce -->
+    <string name="db_toggle">Дебаунс (400мс)</string>
+    <string name="db_label">Поиск покемона</string>
+    <string name="db_changes">Изменений текста: %1$d</string>
+    <string name="db_requests">Запросов ушло: %1$d</string>
+
+    <!-- B1 Flow cold/hot + conflation -->
+    <string name="flow_title">Cold Flow vs StateFlow</string>
+    <string name="flow_cold_label">Flow { } (cold)</string>
+    <string name="flow_hot_label">StateFlow (hot)</string>
+    <string name="flow_subscribers">Подписчиков: %1$d</string>
+    <string name="flow_requests">Запросов к «сети»: %1$d</string>
+    <string name="flow_add_subscriber">Добавить подписчика</string>
+    <string name="flow_reset">Сбросить</string>
+    <string name="flow_subscriber_value">Подписчик #%1$d: %2$s</string>
+    <string name="flow_subscriber_pending">…</string>
+    <string name="conflation_title">Conflation: быстрый источник, медленный подписчик</string>
+    <string name="conflation_toggle">conflate()</string>
+    <string name="conflation_emitted">Эмитировано: %1$d</string>
+    <string name="conflation_received">Получено подписчиком: %1$d</string>
+    <string name="conflation_note_on">С conflate() эмиттер не ждёт подписчика — эмитировано уходит далеко вперёд</string>
+    <string name="conflation_note_off">Без conflate() эмиттер ждёт готовности подписчика на каждом значении — числа идут почти вровень</string>
+
+    <!-- B2 Serialization -->
+    <string name="ser_descriptor_title">Дескриптор, который сгенерировал компилятор:</string>
+    <string name="ser_serial_name">serialName = %1$s</string>
+    <string name="ser_field">  · %1$s: %2$s</string>
+    <string name="ser_note">Это не пересказ — вызов DemoDto.serializer().descriptor вернул настоящий объект, который сгенерировал компилятор при виде @Serializable.</string>
+    <string name="ser_question_title">А если класс не пометить @Serializable?</string>
+    <string name="ser_explanation">Компилируется. Резолвинг сериализатора — не проверка типов, а поиск сгенерированного кода; когда его нет, поиск падает не на этапе компиляции, а в момент вызова.</string>
+    <string name="ser_try_button">Попробовать декодировать NotAnnotated</string>
+    <string name="ser_real_exception">Настоящее исключение:
+%1$s</string>
+    <string name="ser_unexpectedly_worked">неожиданно сработало</string>
+
+    <!-- C1 Structured concurrency — гвоздь -->
+    <string name="sc_leak_label">GlobalScope (утечка)</string>
+    <string name="sc_structured_label">viewModelScope (structured)</string>
+    <string name="sc_in_flight">Незавершённых запросов: %1$d</string>
+    <string name="sc_open_detail">Открыть деталь</string>
+    <string name="sc_log_title">Лог:</string>
+    <string name="sc_log_empty">(пусто)</string>
+    <string name="sc_detail_loading">Деталь записи (грузится 2.5с)</string>
+    <string name="sc_back">Назад</string>
+    <string name="sc_log_arrived_dead">ответ пришёл — экрана уже нет</string>
+    <string name="sc_log_arrived_ontime">ответ пришёл вовремя</string>
+</resources>

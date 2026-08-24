@@ -1,0 +1,95 @@
+<resources>
+    <string name="stand_title">Lecture 4 demo stand</string>
+    <string name="stand_subtitle">Data and asynchrony · Compose Multiplatform</string>
+    <string name="stand_back">Back</string>
+    <string name="stand_theme_dark">Dark theme</string>
+    <string name="stand_theme_light">Light theme</string>
+    <string name="stand_locale_note">Every label here came from resources and follows the system language</string>
+    <string name="stand_not_found">Demo not found</string>
+
+    <string name="depth_usage">How to use it</string>
+    <string name="depth_mechanism">How it works</string>
+    <string name="depth_internals">Under the hood</string>
+
+    <string name="demo_mapper">DTO -> domain -> UI, three models</string>
+    <string name="demo_screen_state">Screen state: sum type vs flags</string>
+    <string name="demo_pagination">Pagination: load more without dupes</string>
+    <string name="demo_debounce">Debounce on top of search</string>
+    <string name="demo_flow_cold_hot">Flow: cold vs hot, conflation</string>
+    <string name="demo_serialization">Serialization without reflection</string>
+    <string name="demo_structured_concurrency">Leaving mid-load</string>
+
+    <string name="mapper_toggle_label">Server updated the schema (image_url -> sprite)</string>
+    <string name="mapper_using_v1">Parsing PokemonCardDtoV1 (image_url field)</string>
+    <string name="mapper_using_v2">Parsing PokemonCardDtoV2 (sprite field)</string>
+    <string name="mapper_screen_got">The screen got a PokemonCard — the only model it knows about:</string>
+    <string name="mapper_note">The screen code (this file) did not change between the two toggle positions. Only which mapper is called changed: toDomain() on DtoV1 or on DtoV2.</string>
+
+    <string name="ss_intro">On the left — three independent flags. On the right — one ScreenState sum type.</string>
+    <string name="ss_boolean_title">Boolean version</string>
+    <string name="ss_is_loading">isLoading</string>
+    <string name="ss_is_error">isError</string>
+    <string name="ss_has_data">hasData</string>
+    <string name="ss_sealed_title">ScreenState version</string>
+    <string name="ss_label_loading">Loading</string>
+    <string name="ss_label_content">Content</string>
+    <string name="ss_label_empty">Empty</string>
+    <string name="ss_label_error">Error</string>
+    <string name="ss_error_loading">Loading error</string>
+    <string name="ss_data_placeholder">Data: 25 records</string>
+    <string name="ss_empty">Empty</string>
+    <string name="ss_illegal_warning">⚠ isLoading and isError are both true — a spinner over an error, the state makes no sense, but boolean flags do not forbid it</string>
+    <string name="ss_data_value">Data: %1$s</string>
+    <string name="ss_error_value">Error: %1$s</string>
+    <string name="ss_no_network">no network</string>
+
+    <string name="pg_loaded">Loaded: %1$d</string>
+    <string name="pg_requests">Requests: %1$d</string>
+    <string name="pg_error">Error: %1$s</string>
+    <string name="pg_error_fallback">network error</string>
+    <string name="pg_loading_next">loading next page</string>
+    <string name="pg_end">End of list</string>
+
+    <string name="db_toggle">Debounce (400ms)</string>
+    <string name="db_label">Search Pokémon</string>
+    <string name="db_changes">Text changes: %1$d</string>
+    <string name="db_requests">Requests sent: %1$d</string>
+
+    <string name="flow_title">Cold Flow vs StateFlow</string>
+    <string name="flow_cold_label">Flow { } (cold)</string>
+    <string name="flow_hot_label">StateFlow (hot)</string>
+    <string name="flow_subscribers">Subscribers: %1$d</string>
+    <string name="flow_requests">Requests to the "network": %1$d</string>
+    <string name="flow_add_subscriber">Add subscriber</string>
+    <string name="flow_reset">Reset</string>
+    <string name="flow_subscriber_value">Subscriber #%1$d: %2$s</string>
+    <string name="flow_subscriber_pending">…</string>
+    <string name="conflation_title">Conflation: fast source, slow subscriber</string>
+    <string name="conflation_toggle">conflate()</string>
+    <string name="conflation_emitted">Emitted: %1$d</string>
+    <string name="conflation_received">Received by subscriber: %1$d</string>
+    <string name="conflation_note_on">With conflate() the emitter does not wait for the subscriber — emitted runs far ahead</string>
+    <string name="conflation_note_off">Without conflate() the emitter waits for the subscriber on every value — the numbers stay almost level</string>
+
+    <string name="ser_descriptor_title">The descriptor the compiler generated:</string>
+    <string name="ser_serial_name">serialName = %1$s</string>
+    <string name="ser_field">  · %1$s: %2$s</string>
+    <string name="ser_note">This is not a retelling — calling DemoDto.serializer().descriptor returned a real object the compiler generated when it saw @Serializable.</string>
+    <string name="ser_question_title">What if the class is not marked @Serializable?</string>
+    <string name="ser_explanation">It compiles. Serializer resolution is not type checking — it is a lookup for generated code; when there is none, the lookup fails not at compile time, but at the call site.</string>
+    <string name="ser_try_button">Try decoding NotAnnotated</string>
+    <string name="ser_real_exception">The real exception:
+%1$s</string>
+    <string name="ser_unexpectedly_worked">unexpectedly worked</string>
+
+    <string name="sc_leak_label">GlobalScope (leak)</string>
+    <string name="sc_structured_label">viewModelScope (structured)</string>
+    <string name="sc_in_flight">Unfinished requests: %1$d</string>
+    <string name="sc_open_detail">Open detail</string>
+    <string name="sc_log_title">Log:</string>
+    <string name="sc_log_empty">(empty)</string>
+    <string name="sc_detail_loading">Record detail (loads for 2.5s)</string>
+    <string name="sc_back">Back</string>
+    <string name="sc_log_arrived_dead">response arrived — the screen is already gone</string>
+    <string name="sc_log_arrived_ontime">response arrived on time</string>
+</resources>
