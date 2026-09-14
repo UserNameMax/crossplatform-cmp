@@ -24,14 +24,6 @@
     <string name="demo_list_keys">Ключи в списке</string>
     <string name="demo_search">Поиск и лишние перерисовки</string>
 
-    <!-- A4 Подъём состояния -->
-    <string name="a4_explanation">Ниже два экземпляра одного и того же компонента. Своего состояния у него нет: значение приходит параметром, намерение уходит колбэком.</string>
-    <string name="a4_first_field">Первое поле</string>
-    <string name="a4_second_field">Второе поле</string>
-    <string name="a4_state_lives_here">Состояние лежит здесь, у родителя:</string>
-    <string name="a4_first_value">первое: «%1$s»</string>
-    <string name="a4_second_value">второе: «%1$s»</string>
-
     <!-- A3 remember и ввод -->
     <string name="a3_explanation">Попробуйте напечатать что-нибудь в обоих режимах.</string>
     <string name="a3_with_remember">С remember</string>
@@ -45,11 +37,6 @@
     <string name="a5_explanation">Переключите тему в шапке стенда. Одна карточка поменяется, вторая нет.</string>
     <string name="a5_from_tokens">Цвет из токенов темы</string>
     <string name="a5_hardcoded">Цвет зашит в код</string>
-
-    <!-- A7 Порядок модификаторов -->
-    <string name="a7_explanation">Два одинаковых элемента. Отличается только порядок padding и size — и габариты получаются разные.</string>
-    <string name="a7_padding_first">padding до size: отступ снаружи, синий квадрат остаётся 120</string>
-    <string name="a7_size_first">size до padding: 120 включают отступ, синего остаётся меньше</string>
 
     <!-- A6 Один проход измерения -->
     <string name="a6_explanation">Три колонки разной высоты. Включите интринсики: колонки выровняются по самой высокой, а число измерений останется прежним.</string>
@@ -110,4 +97,89 @@
     <string name="a9_by_wrapper">Список внутри обёртки</string>
     <string name="a9_by_wrapper_note">нестабильный класс сравнивают по ссылке</string>
     <string name="a9_redrawn">перерисован</string>
+
+    <!-- stand — сверка с колодами Л1, 14.09.2026 -->
+    <string name="demo_route_argument">Модель в маршруте</string>
+    <string name="demo_phases">Рекомпозиция и переизмерение</string>
+    <string name="demo_teaching_column">Учебная колонка</string>
+    <string name="demo_offset_phase">Модификаторы по фазам</string>
+    <string name="demo_state_read">Чтение и запись состояния</string>
+    <string name="demo_skip_fixes">Три способа починить</string>
+    <string name="phase_composition">композиция</string>
+    <string name="phase_layout">layout</string>
+    <string name="phase_draw">отрисовка</string>
+
+    <!-- a4 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a4_explanation">Одно и то же поле стоит в двух местах экрана. Состояние вниз, события вверх: значение приходит параметром, событие уходит колбэком во ViewModel.</string>
+    <string name="a4_hoisted">Состояние поднято во ViewModel</string>
+    <string name="a4_stateful">Состояние внутри поля, remember</string>
+    <string name="a4_hint_hoisted">SearchField(query, onQueryChange) — рисует ровно query</string>
+    <string name="a4_hint_stateful">SearchField() — ViewModel о нём не знает, у каждого места вызова своя память</string>
+    <string name="a4_field_header">Поиск в шапке</string>
+    <string name="a4_field_results">Поиск в результатах</string>
+    <string name="a4_vm_value">Во ViewModel: «%1$s»</string>
+    <string name="a4_clear">Сбросить из ViewModel</string>
+
+    <!-- a5 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a5_subtree">Поддерево со своей темой — всегда тёмная</string>
+
+    <!-- a7 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a7_explanation">Четыре цепочки со слайда. Отличается только порядок звеньев — а размеры и заливка разные.</string>
+    <string name="a7_legend">Пунктир — границы узла, сплошная рамка — содержимое. Размеры сняты с узла после измерения.</string>
+    <string name="a7_node_size">узел %1$d×%2$d</string>
+    <string name="a7_content_size">содержимое %1$d×%2$d</string>
+
+    <!-- a11 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a11_explanation">Откройте карточку, нажмите «Эволюция в источнике». Данные обновились в одном месте — посмотрите, что показывает экран.</string>
+    <string name="a11_by_id">В маршруте id</string>
+    <string name="a11_by_model">В маршруте модель целиком</string>
+    <string name="a11_hint_id">Screen.Detail(id) — данные достаёт сам экран</string>
+    <string name="a11_hint_model">Screen.Detail(item) — стек возит копию данных</string>
+    <string name="a11_stack">backStack = %1$s</string>
+    <string name="a11_on_screen">Экран показывает: %1$s</string>
+    <string name="a11_in_source">В источнике сейчас: %1$s</string>
+    <string name="a11_evolve">Эволюция в источнике</string>
+    <string name="a11_back">Назад</string>
+
+    <!-- a12 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a12_explanation">Наберите букву — перезапускается композиция того, кому пришёл новый query. Сдвиньте ползунок — композиция стоит, пересчитываются layout и отрисовка.</string>
+    <string name="a12_query">query</string>
+    <string name="a12_width">Ширина окна</string>
+    <string name="a12_top_bar">TopBar() — без параметров</string>
+    <string name="a12_search_field">SearchField(query)</string>
+    <string name="a12_title">Покедекс</string>
+
+    <!-- a13 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a13_explanation">Двигайте ползунок в обоих режимах. Квадрат едет одинаково, а счётчик композиции — нет.</string>
+    <string name="a13_in_composition">shift прочитан в композиции</string>
+    <string name="a13_in_layout">shift прочитан в layout</string>
+    <string name="a13_hint_composition">рекомпозиция на каждый сдвиг</string>
+    <string name="a13_hint_layout">лямбда откладывает чтение — композицию не трогает</string>
+    <string name="a13_compositions">Mover — композиций</string>
+    <string name="a13_shift">shift</string>
+
+    <!-- a14 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a14_explanation">Рамка высотой 260, колонка с fillMaxSize(), три ребёнка. Код учебной колонки — дословно со слайда «Три шага в коде».</string>
+    <string name="a14_teaching">Учебная колонка со слайда</string>
+    <string name="a14_real">Настоящий Column</string>
+    <string name="a14_hint_teaching">без copy(minHeight = 0) и constrainHeight: все дети растянуты на 260, содержимое отцентрировано — в окне середина, второй ребёнок</string>
+    <string name="a14_hint_real">детям минимум 0, свой размер — в пределах рамок</string>
+
+    <!-- a15 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a15_explanation">Одно значение, два места чтения. Жмите «+1» в обоих режимах и сравнивайте, чей счётчик бежит. Потом «Записать то же».</string>
+    <string name="a15_read_in_parent">Читает родитель</string>
+    <string name="a15_read_in_child">Читает ребёнок</string>
+    <string name="a15_hint_parent">ChildGetsValue(value = count.intValue) — чтение в родителе</string>
+    <string name="a15_hint_child">ChildReads(count) — родителю передан State, чтение ниже</string>
+    <string name="a15_increment">+1</string>
+    <string name="a15_same_value">Записать то же</string>
+    <string name="a15_parent">родитель</string>
+    <string name="a15_child">ребёнок</string>
+    <string name="a15_sibling">сосед</string>
+    <string name="a15_value">значение: %1$d</string>
+
+    <!-- a16 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a16_explanation">Наберите букву в каждом режиме. Первый — сломанный, как в «Поиске и лишних перерисовках»; остальные три — починки в порядке предпочтительности.</string>
+    <string name="a16_search">Поиск</string>
+    <string name="a16_redrawn">перерисован</string>
 </resources>

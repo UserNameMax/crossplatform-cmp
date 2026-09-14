@@ -1,6 +1,14 @@
 package band.effective.education.crossplatform.stand
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +28,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,10 +36,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.savedstate.read
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import lection1.shared.generated.resources.Res
 import lection1.shared.generated.resources.stand_back
 import lection1.shared.generated.resources.stand_locale_note
@@ -41,9 +48,17 @@ import lection1.shared.generated.resources.stand_theme_light
 import lection1.shared.generated.resources.stand_title
 import org.jetbrains.compose.resources.stringResource
 
-private const val ROUTE_LIST = "list"
-private const val ROUTE_DEMO = "demo"
-private const val ARG_ID = "demoId"
+/** Длительность перехода между экранами. Одна на оба направления. */
+private const val TRANSITION_MS = 300
+
+/**
+ * Экран стенда — объект, а не строка-адрес. Ровно то, что показано в блоке D1:
+ * аргумент лежит полем, опечатку в нём ловит компилятор.
+ */
+sealed interface StandScreen {
+    data object List : StandScreen
+    data class Demo(val id: String) : StandScreen
+}
 
 /**
  * Оболочка стенда.
@@ -51,33 +66,57 @@ private const val ARG_ID = "demoId"
  * Помимо своей прямой работы сам служит иллюстрацией к блоку D1: тут есть навигация
  * со стеком, тема из токенов и строки из ресурсов. Когда на паре заходит речь про
  * тему — переключатель уже на экране, достаточно нажать.
+ *
+ * Навигация — Navigation 3, как в колоде и в шаблоне ПЗ1: стек — обычный список
+ * объектов-экранов в состоянии композиции, графа маршрутов нет. До 14.09.2026 здесь
+ * стоял Navigation Compose со строковыми маршрутами — то самое устройство, от которого
+ * колода D1 отталкивается, поэтому заменено.
  */
 @Composable
 fun Stand() {
-    var dark by remember { mutableStateOf(false) }
-    val navController = rememberNavController()
+    // Системная настройка — входное значение, дальше тема переключается тумблером.
+    val systemDark = isSystemInDarkTheme()
+    var dark by remember { mutableStateOf(systemDark) }
+    val backStack = remember { mutableStateListOf<StandScreen>(StandScreen.List) }
+    // Корень не снимается: пустой стек NavDisplay не принимает и роняет приложение.
+    // Проверено 14.09.2026 — двойное нажатие «Назад» на web ловило ровно это.
+    val back: () -> Unit = { if (backStack.size > 1) backStack.removeLastOrNull() }
 
     StandTheme(dark = dark) {
-        NavHost(navController = navController, startDestination = ROUTE_LIST) {
-            composable(ROUTE_LIST) {
-                DemoListScreen(
-                    dark = dark,
-                    onThemeChange = { dark = it },
-                    onOpen = { demo -> navController.navigate("$ROUTE_DEMO/${demo.id}") },
-                )
-            }
-            composable("$ROUTE_DEMO/{$ARG_ID}") { entry ->
-                val demo = demoById(entry.arguments?.read { getStringOrNull(ARG_ID) })
-                DemoScreen(
-                    demo = demo,
-                    dark = dark,
-                    onThemeChange = { dark = it },
-                    onBack = { navController.popBackStack() },
-                )
-            }
-        }
+        NavDisplay(
+            backStack = backStack,
+            onBack = back,                                                    // назад — убрать последний
+            // Все три спецификации задаются явно: значения по умолчанию на не-Android
+            // таргетах — заглушки, которые бросают NotImplementedError (грабля ПЗ1).
+            transitionSpec = { slide(SlideDirection.Start) },
+            popTransitionSpec = { slide(SlideDirection.End) },
+            predictivePopTransitionSpec = { slide(SlideDirection.End) },
+            entryProvider = entryProvider {
+                entry<StandScreen.List> {
+                    DemoListScreen(
+                        dark = dark,
+                        onThemeChange = { dark = it },
+                        onOpen = { demo -> backStack.add(StandScreen.Demo(demo.id)) }, // открыть — добавить в конец
+                    )
+                }
+                entry<StandScreen.Demo> { key ->
+                    DemoScreen(
+                        demo = demoById(key.id),
+                        dark = dark,
+                        onThemeChange = { dark = it },
+                        onBack = back,
+                    )
+                }
+            },
+        )
     }
 }
+
+private fun AnimatedContentTransitionScope<*>.slide(direction: SlideDirection): ContentTransform =
+    (slideIntoContainer(direction, tween(TRANSITION_MS)) + fadeIn(tween(TRANSITION_MS)))
+        .togetherWith(
+            slideOutOfContainer(direction, tween(TRANSITION_MS)) + fadeOut(tween(TRANSITION_MS)),
+        )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -38,13 +38,22 @@ import org.jetbrains.compose.resources.stringResource
  * вне пары. По умолчанию выключен.
  */
 /**
- * Единственная строка стенда, которой НЕ место в ресурсах: сюда вставляется дословный
- * текст исключения из консоли. Переводить его нельзя — на паре читается оригинал.
+ * Единственная строка стенда, которой НЕ место в ресурсах: дословный текст исключения.
+ * Переводить его нельзя — на паре читается оригинал.
+ *
+ * Снят 14.09.2026 прогоном этого же кода (Column с verticalScroll и LazyColumn внутри)
+ * в ImageComposeScene на JVM, Kotlin 2.4.10 / CMP 1.11.1. Бросает его
+ * checkScrollableContainerConstraints из foundation (CheckScrollableContainerConstraints.kt).
  */
-private const val CAPTURED_MESSAGE = "ТЕКСТ ИСКЛЮЧЕНИЯ ПОКА НЕ СНЯТ.\n\n" +
-    "Как снять: включить тумблер ниже, запустить на desktop, скопировать сообщение " +
-    "из консоли целиком и вставить сюда, в CAPTURED_MESSAGE.\n\n" +
-    "Пересказывать своими словами нельзя — на паре читается настоящий текст."
+private const val CAPTURED_MESSAGE =
+    "java.lang.IllegalStateException: Vertically scrollable component was measured with an " +
+    "infinity maximum height constraints, which is disallowed. One of the common reasons is " +
+    "nesting layouts like LazyColumn and Column(Modifier.verticalScroll()). If you want to add " +
+    "a header before the list of items please add a header as a separate item() before the main " +
+    "items() inside the LazyColumn scope. There could be other reasons for this to happen: your " +
+    "ComposeView was added into a LinearLayout with some weight, you applied " +
+    "Modifier.wrapContentSize(unbounded = true) or wrote a custom layout. Please try to remove " +
+    "the source of infinite constraints in the hierarchy above the scrolling container."
 
 @Composable
 fun InfiniteHeightDemo() {

@@ -14,10 +14,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import band.effective.education.crossplatform.stand.DemoScaffold
+import band.effective.education.crossplatform.stand.StandTheme
 import lection1.shared.generated.resources.Res
 import lection1.shared.generated.resources.a5_explanation
 import lection1.shared.generated.resources.a5_from_tokens
 import lection1.shared.generated.resources.a5_hardcoded
+import lection1.shared.generated.resources.a5_subtree
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -27,6 +29,10 @@ import org.jetbrains.compose.resources.stringResource
  * его просто никто не читает из контекста.
  *
  * Переключатель темы живёт в шапке стенда, отдельного тумблера тут не нужно.
+ *
+ * Третья карточка — поддерево со своей темой, как на слайде «Тема в коде»: контекст
+ * вложенный, провайдер ниже по дереву перекрывает корневой только для своих потомков.
+ * В тёмной теме стенда она совпадает с первой, в светлой — инвертирована.
  */
 @Composable
 fun ThemeTokensDemo() {
@@ -37,22 +43,16 @@ fun ThemeTokensDemo() {
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .padding(16.dp),
-            ) {
-                Text(
-                    text = stringResource(Res.string.a5_from_tokens),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                )
-                Text(
-                    text = "MaterialTheme.colorScheme.primaryContainer",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+            TokenCard(
+                title = stringResource(Res.string.a5_from_tokens),
+                code = "MaterialTheme.colorScheme.primaryContainer",
+            )
+
+            // поддерево со своей темой: те же токены, другой провайдер выше по дереву
+            StandTheme(dark = true) {
+                TokenCard(
+                    title = stringResource(Res.string.a5_subtree),
+                    code = "StandTheme(dark = true) { … }",
                 )
             }
 
@@ -75,5 +75,28 @@ fun ThemeTokensDemo() {
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun TokenCard(title: String, code: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .padding(16.dp),
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+        )
+        Text(
+            // листинг кода, не подпись интерфейса
+            text = code,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+        )
     }
 }

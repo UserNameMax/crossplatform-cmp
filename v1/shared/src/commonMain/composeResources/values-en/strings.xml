@@ -21,13 +21,6 @@
     <string name="demo_list_keys">Keys in a list</string>
     <string name="demo_search">Search and extra recompositions</string>
 
-    <string name="a4_explanation">Two instances of the very same component. It holds no state of its own: the value arrives as a parameter, the intent leaves as a callback.</string>
-    <string name="a4_first_field">First field</string>
-    <string name="a4_second_field">Second field</string>
-    <string name="a4_state_lives_here">The state lives here, in the parent:</string>
-    <string name="a4_first_value">first: «%1$s»</string>
-    <string name="a4_second_value">second: «%1$s»</string>
-
     <string name="a3_explanation">Try typing something in both modes.</string>
     <string name="a3_with_remember">With remember</string>
     <string name="a3_without_remember">Without remember</string>
@@ -39,10 +32,6 @@
     <string name="a5_explanation">Switch the theme in the header. One card changes, the other does not.</string>
     <string name="a5_from_tokens">Color from theme tokens</string>
     <string name="a5_hardcoded">Color hardcoded in the source</string>
-
-    <string name="a7_explanation">Two identical elements. Only the order of padding and size differs — and the resulting bounds differ too.</string>
-    <string name="a7_padding_first">padding before size: the inset is outside, the blue square stays 120</string>
-    <string name="a7_size_first">size before padding: 120 includes the inset, less blue is left</string>
 
     <string name="a6_explanation">Three columns of different height. Turn intrinsics on: the columns align to the tallest, and the number of measurements stays the same.</string>
     <string name="a6_intrinsics_on">Intrinsics on</string>
@@ -98,4 +87,89 @@
     <string name="a9_by_wrapper">List inside a wrapper</string>
     <string name="a9_by_wrapper_note">an unstable class is compared by reference</string>
     <string name="a9_redrawn">redrawn</string>
+
+    <!-- stand — сверка с колодами Л1, 14.09.2026 -->
+    <string name="demo_route_argument">Model in the route</string>
+    <string name="demo_phases">Recomposition vs remeasure</string>
+    <string name="demo_teaching_column">Teaching column</string>
+    <string name="demo_offset_phase">Modifiers by phase</string>
+    <string name="demo_state_read">Reading and writing state</string>
+    <string name="demo_skip_fixes">Three ways to fix</string>
+    <string name="phase_composition">composition</string>
+    <string name="phase_layout">layout</string>
+    <string name="phase_draw">draw</string>
+
+    <!-- a4 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a4_explanation">The same field sits in two places on the screen. State down, events up: the value comes in as a parameter, the event goes out through a callback to the ViewModel.</string>
+    <string name="a4_hoisted">State hoisted to the ViewModel</string>
+    <string name="a4_stateful">State inside the field, remember</string>
+    <string name="a4_hint_hoisted">SearchField(query, onQueryChange) draws exactly query</string>
+    <string name="a4_hint_stateful">SearchField(): the ViewModel knows nothing, each call site has its own memory</string>
+    <string name="a4_field_header">Search in the header</string>
+    <string name="a4_field_results">Search in the results</string>
+    <string name="a4_vm_value">In the ViewModel: “%1$s”</string>
+    <string name="a4_clear">Clear from the ViewModel</string>
+
+    <!-- a5 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a5_subtree">Subtree with its own theme — always dark</string>
+
+    <!-- a7 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a7_explanation">Four chains from the slide. Only the order of links differs — yet sizes and fill differ.</string>
+    <string name="a7_legend">Dashed — node bounds, solid — content. Sizes are read from the node after measuring.</string>
+    <string name="a7_node_size">node %1$d×%2$d</string>
+    <string name="a7_content_size">content %1$d×%2$d</string>
+
+    <!-- a11 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a11_explanation">Open a card and tap “Evolve in source”. The data changed in one place — look at what the screen shows.</string>
+    <string name="a11_by_id">Route holds the id</string>
+    <string name="a11_by_model">Route holds the whole model</string>
+    <string name="a11_hint_id">Screen.Detail(id): the screen fetches its own data</string>
+    <string name="a11_hint_model">Screen.Detail(item): the stack carries a copy of the data</string>
+    <string name="a11_stack">backStack = %1$s</string>
+    <string name="a11_on_screen">Screen shows: %1$s</string>
+    <string name="a11_in_source">Source now has: %1$s</string>
+    <string name="a11_evolve">Evolve in source</string>
+    <string name="a11_back">Back</string>
+
+    <!-- a12 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a12_explanation">Type a letter — composition restarts for whoever got a new query. Move the slider — composition stays, layout and draw are recomputed.</string>
+    <string name="a12_query">query</string>
+    <string name="a12_width">Window width</string>
+    <string name="a12_top_bar">TopBar() — no parameters</string>
+    <string name="a12_search_field">SearchField(query)</string>
+    <string name="a12_title">Pokédex</string>
+
+    <!-- a13 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a13_explanation">Move the slider in both modes. The square moves the same, the composition counter does not.</string>
+    <string name="a13_in_composition">shift read in composition</string>
+    <string name="a13_in_layout">shift read in layout</string>
+    <string name="a13_hint_composition">a recomposition on every move</string>
+    <string name="a13_hint_layout">the lambda defers the read — composition untouched</string>
+    <string name="a13_compositions">Mover — compositions</string>
+    <string name="a13_shift">shift</string>
+
+    <!-- a14 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a14_explanation">A 260-high frame, a column with fillMaxSize(), three children. The teaching column code is verbatim from the “Three steps in code” slide.</string>
+    <string name="a14_teaching">Teaching column from the slide</string>
+    <string name="a14_real">Real Column</string>
+    <string name="a14_hint_teaching">no copy(minHeight = 0) and no constrainHeight: every child stretched to 260, content centered — the window shows the middle, the second child</string>
+    <string name="a14_hint_real">children get min 0, own size stays within constraints</string>
+
+    <!-- a15 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a15_explanation">One value, two places to read it. Press “+1” in both modes and compare whose counter runs. Then “Write the same”.</string>
+    <string name="a15_read_in_parent">Parent reads</string>
+    <string name="a15_read_in_child">Child reads</string>
+    <string name="a15_hint_parent">ChildGetsValue(value = count.intValue): read in the parent</string>
+    <string name="a15_hint_child">ChildReads(count): the parent passes State, read lower</string>
+    <string name="a15_increment">+1</string>
+    <string name="a15_same_value">Write the same</string>
+    <string name="a15_parent">parent</string>
+    <string name="a15_child">child</string>
+    <string name="a15_sibling">sibling</string>
+    <string name="a15_value">value: %1$d</string>
+
+    <!-- a16 — сверка с колодами Л1, 14.09.2026 -->
+    <string name="a16_explanation">Type a letter in each mode. The first is broken, as in “Search and extra redraws”; the other three are fixes in order of preference.</string>
+    <string name="a16_search">Search</string>
+    <string name="a16_redrawn">redrawn</string>
 </resources>
